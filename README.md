@@ -53,7 +53,7 @@ This template, the application code and configuration it contains, has been buil
 
 This sample demonstrates a few approaches for creating ChatGPT-like experiences over your own data using the Retrieval Augmented Generation pattern. It uses Azure OpenAI Service to access a GPT model (gpt-4.1-mini), and Azure AI Search for data indexing and retrieval.
 
-The repo includes sample data so it's ready to try end to end. In this sample application we use a fictitious company called Contoso Electronics, and the experience allows its employees to ask questions about the benefits, internal policies, as well as job descriptions and roles.
+The repo includes sample data so it's ready to try end to end. In this sample application we use a fictitious company called Contoso Electronics, and the experience allows its employees to ask questions about the benefits, internal policies, as well as job descriptions and roles. Once the application is configured correctly and running, then we can switch  our company ( any company) . To change the company we have to edit the prompt contents, javascript frontend application source code (index.html) and delete the documents in the data folder and upload our company specific documents. Complete details are given in separate pages.
 
 ## Features
 
@@ -77,7 +77,15 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 - **Azure account**. If you're new to Azure, [get an Azure account for free](https://azure.microsoft.com/free/cognitive-search/) and you'll get some free Azure credits to get started. See [guide to deploying with the free trial](docs/deploy_freetrial.md).
 - **Azure account permissions**:
   - Your Azure account must have `Microsoft.Authorization/roleAssignments/write` permissions, such as [Role Based Access Control Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#role-based-access-control-administrator-preview), [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator), or [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner). If you don't have subscription-level permissions, you must be granted [RBAC](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#role-based-access-control-administrator-preview) for an existing resource group and [deploy to that existing group](docs/deploy_existing.md#resource-group).
-  - Your Azure account also needs `Microsoft.Resources/deployments/write` permissions on the subscription level.
+  - Your Azure account also needs `Microsoft.Resources/deployments/write` permissions on the subscription level. 
+
+  This constraint is applicable only if you go with default installation using the scripts from scratch. These permissions will be normally available in the Subcription Owner role only, so if you dont have owner role, there are alternatives and I have explained them in another page.
+
+  In fact, This project consists of two components , Python API Server and Javascript Front End.  Javascript Front end is giving as web chat feature . It calls the Python backend API. Both components, ie Python API and javascript web application are in single python quart application. As it is web application , it can run in any linux VM or Azure Function or Azure Container Application. Microsofts Default installation route will install App service, Application Insigts and many more things. But we Azure Function App or Container app are not mandatory. We can directly run in a vm itself . This option is mentioned as local development server deployment .
+
+  Similarly , the default installation script creates managed identity and tries assign the necessary roles to that Managed Identity. if we dont have role assigning permissions, we can go with different route.  Three cloud services are used in this Python Web  application , They are Azure OpenAI, Azure Search and Azure Storage . All three services can be made accessible through API key . Then we dont need Managed Identity and Role Assignment Permissions. 
+
+  Managed Idenity and RBAC increases the security compared to API Keys usage, but security hardening is required for both cases and in Application Gateway and Firewall , we can ensure and implement the necessary Security precautions.
 
 ### Cost estimation
 
