@@ -1,0 +1,20 @@
+# Microsoft Bot Framework SDK for Python - Latest Version
+botbuilder-core>=4.15.0
+botbuilder-schema>=4.15.0
+# HTTP client and web framework
+aiohttp>=3.8.0
+asyncio-throttle>=1.0.2
+# Data validation and serialization
+pydantic>=2.0.0
+# Environment variable management
+python-dotenv>=1.0.0
+# Logging (if you want structured logging)
+structlog>=23.0.0
+# Optional: For production deployment
+gunicorn>=20.1.0
+uvloop>=0.17.0  # For better async performance on Linux
+# Development dependencies (optional)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
