@@ -361,7 +361,7 @@ class RAGTeamsBot(TeamsActivityHandler):
                         conversation_data: ConversationData, user_profile: UserProfile):
         """Show help message"""
         help_text = """
-🤖 **RAG Chat Bot Commands:**
+**RAG Chat Bot Commands:**
 
 • `/help` - Show this help message
 • `/clear` - Clear conversation history
@@ -377,7 +377,7 @@ class RAGTeamsBot(TeamsActivityHandler):
 
 **Example:** `/config temperature 0.7`
 
-Just type your question to chat with the RAG system! 💬
+Just type your question to chat with the RAG system! 
         """
         await turn_context.send_activity(MessageFactory.text(help_text))
 
@@ -405,7 +405,7 @@ Just type your question to chat with the RAG system! 💬
         """Configure bot settings"""
         if len(args) < 2:
             await turn_context.send_activity(
-                MessageFactory.text("❌ Usage: `/config <setting> <value>`\nExample: `/config temperature 0.7`")
+                MessageFactory.text(" Usage: `/config <setting> <value>`\nExample: `/config temperature 0.7`")
             )
             return
         
@@ -455,12 +455,12 @@ Just type your question to chat with the RAG system! 💬
                          conversation_data: ConversationData, user_profile: UserProfile):
         """Show bot status"""
         status_text = f"""
-🤖 **RAG Bot Status:**
+**RAG Bot Status:**
 
 • **History:** {len(conversation_data.chat_history)} messages
 • **Session:** {'Active' if conversation_data.session_state else 'New'}
 • **RAG Endpoint:** {self.rag_client.base_url}
-• **Authentication:** {' Configured' if self.rag_client.auth_token else '❌ Not configured'}
+• **Authentication:** {' Configured' if self.rag_client.auth_token else 'Not configured'}
 
 **Current Settings:**
 """
@@ -477,7 +477,7 @@ Just type your question to chat with the RAG system! 💬
     async def on_members_added_activity(self, members_added: List[ChannelAccount], turn_context: TurnContext):
         """Greet new members"""
         welcome_text = """
-👋 **Welcome to the RAG Chat Bot!**
+ **Welcome to the RAG Chat Bot!**
 
 I'm here to help you search and get answers from your knowledge base using advanced AI.
 
@@ -485,7 +485,7 @@ I'm here to help you search and get answers from your knowledge base using advan
 • Use `/help` to see available commands
 • Use `/settings` to configure search preferences
 
-Let's start chatting! 💬
+Let's start chatting! 
         """
         
         for member in members_added:
